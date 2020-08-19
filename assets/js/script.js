@@ -1,6 +1,7 @@
 let formEl = document.querySelector("#task-form");
 let tasksToDoEl = document.querySelector('#tasks-to-do');
 let taskIdCounter = 0;
+let pageContentEl = document.querySelector('#page-content');
 
 
 let taskFormHandler = function(event) {
@@ -41,7 +42,7 @@ let createTaskEl = function(taskDataObj) {
 
     let taskActionsEl = createTaskActions(taskIdCounter);
     console.log(taskActionsEl);
-    // listItemEl.appendChild(taskActionsEl);
+    listItemEl.appendChild(taskActionsEl);
     
     tasksToDoEl.appendChild(listItemEl);
     
@@ -88,6 +89,7 @@ let createTaskActions = function(taskId){
          //append to select
      statusSelectEl.appendChild(statusOptionEl);
     };
+    return actionContainerEl;
 }
 
 
