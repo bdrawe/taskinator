@@ -91,8 +91,22 @@ let createTaskActions = function(taskId){
     };
     return actionContainerEl;
 }
+let deleteTask = function(taskId){
+    let taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+    taskSelected.remove();
+    console.log(taskId);
+}
+
+let taskButtonHandler = function(event) {
+    if(event.target.matches(".delete-btn"))  {
+        var taskId = event.target.getAttribute("data-task-id");
+        deleteTask(taskId);
+}
+}
 
 
 
 
+
+pageContentEl.addEventListener("click", taskButtonHandler);
 formEl.addEventListener("submit", taskFormHandler);
