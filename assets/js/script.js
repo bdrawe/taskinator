@@ -55,6 +55,8 @@ let createTaskEl = function(taskDataObj) {
     //add task id as a custom attribute
     listItemEl.setAttribute('data-task-id', taskIdCounter);
 
+    listItemEl.setAttribute("draggable", "true");
+
     //create a div to hold class info and add to list item
     let taskInfoEl =  document.createElement("div");
     //give it a class name
@@ -171,9 +173,29 @@ let taskStatusChangeHandler = function(event) {
       }
 };
 
+let dragTaskHandler = function(event) {
+    let taskId = event.target.getAttribute("data-task-id");
+    event.dataTransfer.setData("text/plain", taskId);
+    let getId = event.dataTransfer.getData("text/plain");
+    console.log("getId:", getId, typeof getId);
+} 
 
+let dropZoneDragHandler = function(event) {
+    let taskListEl = event.target.closest(".task-list");
+    if(taskListEl) {
+        event.preventDefault();
+        console.dir(taskListEl);
+    };
+}
 
+let dropTaskHandler = function(event){
+    let id = event.dataTransfer.getData("text/plain");
+    console.log("Drop Event Target:", event.target, event.dataTransfer, id);
+};
 
+pageContentEl.addEventListener("drop", dropTaskHandler);
+pageContentEl.addEventListener("dragover", dropZoneDragHandler);
+pageContentEl.addEventListener("dragstart", dragTaskHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
 pageContentEl.addEventListener("click", taskButtonHandler);
 formEl.addEventListener("submit", taskFormHandler);
