@@ -48,6 +48,7 @@ let completeEditTask = function(taskName, taskType, taskId) {
             tasks[i].type = taskType;
         }
     };
+    saveTasks()
 
     alert("Task Updated!");
 
@@ -82,7 +83,8 @@ let createTaskEl = function(taskDataObj) {
 
     taskDataObj.id = taskIdCounter;
     tasks.push(taskDataObj);
-    
+
+    saveTasks()
 
     taskIdCounter++;
 };
@@ -143,6 +145,7 @@ let deleteTask = function(taskId){
         }
     }
     tasks = updatedTaskArr;
+    saveTasks()
 }
 
 let editTask = function(taskId)
@@ -200,12 +203,14 @@ let taskStatusChangeHandler = function(event) {
             tasks[i].status = statusValue;
         }
     }
+    saveTasks()
 };
 
 let dragTaskHandler = function(event) {
     let taskId = event.target.getAttribute("data-task-id");
     event.dataTransfer.setData("text/plain", taskId);
     let getId = event.dataTransfer.getData("text/plain");
+    saveTasks()
     
 } 
 
@@ -250,6 +255,10 @@ let dragLeaveHandler = function(event) {
     if (taskListEl){
         taskListEl.removeAttribute("style");
     }
+}
+
+let saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 pageContentEl.addEventListener("dragleave", dragLeaveHandler);
