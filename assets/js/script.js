@@ -3,7 +3,7 @@ let tasksToDoEl = document.querySelector('#tasks-to-do');
 let taskIdCounter = 0;
 let pageContentEl = document.querySelector('#page-content');
 let tasksInProgressEl = document.querySelector("#tasks-in-progress");
-let tasksCompleteEl = document.querySelector("#tasks-completed");
+let tasksCompletedEl = document.querySelector("#tasks-completed");
 
 
 let taskFormHandler = function(event) {
